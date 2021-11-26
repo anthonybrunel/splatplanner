@@ -1,0 +1,91 @@
+<launch>
+<arg name="scene" value="facility"/>
+<arg name="world_name" default="basic"/>
+<arg name="mav_name" default="firefly"/>
+<arg name="gui" default="false"/>
+<arg name="verbose_gazebo" default="false"/>
+
+
+<arg name="traj_topic" value="/firefly/command/trajectory" />
+
+<arg name="voxel_size" default="0.1"/>
+<arg name="world_frame" default="world" />
+
+<arg name="cloud_topic" value="/camera/cloud"/>
+<arg name="odom_topic" value="/camera/odom"/>
+<arg name="depth_topic" value="/camera/z_depth"/>
+<arg name="z_depth_topic" value="/camera/z_depth"/>
+
+
+
+
+<arg name="useFov" value="true"/>
+<arg name="width" value="600"/>
+<arg name="fovx" value="90"/>
+<arg name="fovy" value="73.73"/>
+<arg name="max_range" default="7."/>
+
+
+
+  <arg name="uav_gt_odom_topic" value="/ground_truth/odometry"/>
+  <arg name="mesh_folder" default="/home/anthony/oscar/motion_planning/src/oscar/data/map/$(arg scene)/$(arg scene).obj"/>
+  <arg name="save_path" default="/home/anthony/oscar/motion_planning/src/oscar/data/gt/$(arg scene)/$(arg scene).ply"/>
+
+
+  <arg name="x_size" value="25" />
+  <arg name="y_size" value="25" />
+  <arg name="z_size" value="4.6" />
+
+  <arg name="origin_x" value="0" />
+  <arg name="origin_y" value="0" />
+  <arg name="origin_z" value="2." />
+
+  <arg name="x_start" value="-7.5" />
+  <arg name="y_start" value="5.5" />
+  <arg name="z_start" value="1.0" />
+
+ <node name="vk_depth_sim" pkg="ROSVkVizualizer" type="vk_depth_sim" output="screen">
+   <remap from="/camera/cloud" to="$(arg cloud_topic)" />
+   <remap from="/camera/odom" to="$(arg odom_topic)" />
+   <param name="/camera/useUavOdom" value="false" />
+   <param name="/camera/useFov" value="$(arg useFov)" />
+   <param name="/camera/width" value="$(arg width)" />
+   <param name="/camera/fovx" value="$(arg fovx)" />
+   <param name="/camera/fovy" value="$(arg fovy)" />
+   <param name="/camera/max_range" value="$(arg max_range)" />
+   <param name="/camera/model_path" value="$(arg mesh_folder)" />
+   <param name="/camera/oc_x" value="$(arg y_start)" />
+   <param name="/camera/oc_y" value="$(arg z_start)" />
+   <param name="/camera/oc_z" value="$(arg x_start)" />
+
+
+   <param name="/camera/applyDepthNoise" value="false" />
+   <param name="/camera/applyOdomNoise" value="false" />
+ </node>
+
+
+
+
+<node name="cloud_extraction_node" pkg="cloud_extraction" type="cloud_extraction_node" output="screen">
+  <!-- subscriber -->
+  <remap from="/cloud_manager/cloud" to="$(arg cloud_topic)" />
+  <remap from="/cloud_manager/odometry" to="$(arg odom_topic)" />
+  <remap from="/cloud_manager/depth" to="$(arg depth_topic)" />
+
+  <param name="/cloud_manager/resolution" value="0.01" />
+
+  <param name="/cloud_manager/useFov" value="$(arg useFov)" />
+  <param name="/cloud_manager/width" value="$(arg width)" />
+  <param name="/cloud_manager/fovx" value="$(arg fovx)" />
+  <param name="/cloud_manager/fovy" value="$(arg fovy)" />
+  <param name="/cloud_manager/max_range" value="$(arg max_range)" />
+  <param name="/cloud_extraction/save_path" value="$(arg save_path)" />
+  <param name="/cloud_extraction/x_size" value="$(arg x_size)" />
+  <param name="/cloud_extraction/y_size" value="$(arg y_size)" />
+  <param name="/cloud_extraction/z_size" value="$(arg z_size)" />
+  <param name="/cloud_extraction/origin_x" value="$(arg origin_x)" />
+  <param name="/cloud_extraction/origin_y" value="$(arg origin_y)" />
+  <param name="/cloud_extraction/origin_z" value="$(arg origin_z)" />
+</node>
+
+</launch>

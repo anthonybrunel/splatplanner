@@ -1,0 +1,47 @@
+<launch>
+
+
+
+  <!-- topic of your odometry such as VIO or LIO -->
+  <arg name="odom_topic" value="/firefly/ground_truth/odometry" />
+  <arg name="scan_topic" value="/sdf_map/cloud" />
+
+  <arg name="traj_topic" value="/firefly/command/trajectory" />
+
+  <!--<node pkg="plan_manage" name="traj_server" type="traj_server" output="screen">
+    <remap from="/odom_world" to="$(arg odom_topic)"/>
+    <remap from="/sdf_map/odom" to="$(arg odom_topic)"/>
+    <param name="traj_server/time_forward" value="1.5" type="double"/>
+  </node>-->
+
+
+
+  <node pkg="uav_control" name="traj_interface" type="traj_interface" output="screen">
+    <remap from="/traj_interface/uav_control/trajectory" to="$(arg traj_topic)"/>
+    <remap from="/traj_interface/planning/bspline" to="planning/bspline"/>
+    <remap from="/traj_interface/uav_control/odom" to="$(arg odom_topic)"/>
+ </node>
+
+
+  <node pkg="laser_simulator" name="test_laser" type="test_laser" output="screen">
+    <remap from="/test_laser/odom" to="$(arg odom_topic)"/>
+    <remap from="/test_laser/scan_reg" to="$(arg scan_topic)"/>
+    <param name="/test_laser/sensor/frame_id" value="firefly/base_link" type="string"/>
+  </node>
+
+   <node pkg="uav_mapper" name="test_traj" type="test_traj" output="screen">
+    <remap from="/odom_world" to="$(arg odom_topic)"/>
+    <remap from="/sdf_map/odom" to="$(arg odom_topic)"/>
+    <param name="/sdf_map/local_update_range_x" value="20" type="double"/>
+    <param name="/sdf_map/local_update_range_y" value="20" type="double"/>
+    <param name="/sdf_map/local_update_range_z" value="10" type="double"/>
+    <param name="/sdf_map/show_occ_time" value="true" type="bool"/>
+    <param name="/sdf_map/show_esdf_time" value="true" type="bool"/>
+    <param name="/sdf_map/frame_id" value="world" type="string"/>
+
+    <param name="fsm/flight_type" value="1" type="int"/>
+  </node>
+
+
+
+</launch>

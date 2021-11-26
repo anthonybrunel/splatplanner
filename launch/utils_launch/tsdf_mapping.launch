@@ -1,0 +1,31 @@
+
+<launch>
+
+
+
+ <node name="tsdf_node" pkg="tsdf_mapping" type="tsdf_node" output="screen">
+   <!-- subscriber -->
+
+   <remap from="/tsdf_mapping/odometry" to="$(arg odom_topic)" />
+   <remap from="/tsdf_mapping/depth" to="$(arg z_depth_topic)" />
+
+   <param name="/tsdf_mapping/resolution" value="$(arg voxel_size)" />
+   <param name="/tsdf_mapping/x_size" value="$(arg x_size)" />
+   <param name="/tsdf_mapping/y_size" value="$(arg y_size)" />
+   <param name="/tsdf_mapping/z_size" value="$(arg z_size)" />
+
+   <param name="/tsdf_mapping/origin_x" value="$(arg origin_x)" />
+   <param name="/tsdf_mapping/origin_y" value="$(arg origin_y)" />
+   <param name="/tsdf_mapping/origin_z" value="$(arg origin_z)" />
+
+ <param name="/tsdf_mapping/useFov" value="$(arg useFov)" />
+ <param name="/tsdf_mapping/width" value="$(arg width)" />
+ <param name="/tsdf_mapping/fovx" value="$(arg fovx)" />
+ <param name="/tsdf_mapping/fovy" value="$(arg fovy)" />
+ <param name="/tsdf_mapping/max_range" value="$(arg max_range)" />
+ <param name="/tsdf_mapping/esdf_mode" value="0" />
+</node>
+
+
+</launch>
+

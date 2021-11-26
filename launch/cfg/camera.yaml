@@ -1,0 +1,15 @@
+camera/useFov: true
+camera/width : 600
+camera/fovx: 90
+camera/fovy: 73.73
+camera/max_range: 5.
+camera/applyDepthNoise: true
+camera/applyOdomNoise: true
+camera/coeffOdomNoise: 1
+
+
+tsdf_mapping/useFov: true
+tsdf_mapping/width : 600
+tsdf_mapping/fovx: 90
+tsdf_mapping/fovy: 73.73
+tsdf_mapping/max_range: 5.

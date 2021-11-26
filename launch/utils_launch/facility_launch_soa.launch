@@ -1,0 +1,121 @@
+<launch>
+
+
+  <arg name="quad_name" value="hummingbird"/>
+  <arg name="mav_name" value="$(arg quad_name)"/>
+
+  <arg name="gui" value="false"/>
+  <arg name="verbose" value="false"/>
+  <arg name="paused" value="true"/>
+  <arg name="reference_frame" value="world"/>
+  <arg name="world_frame" value="world" />
+  <arg name="world_name" value="$(find rotors_gazebo)/worlds/basic.world"/>
+
+  <arg name="uav_gt_odom_topic" value="$(arg mav_name)/ground_truth/odometry"/>
+  <arg name="traj_topic" value="/hummingbird/autopilot/reference_state" />
+
+  <arg name="odom_topic" value="/camera/odom"/>
+  <arg name="uav_noisy_odom" default="/camera/noisy_odom"/>
+
+  <arg name="cloud_topic" value="/camera/cloud"/>
+  <arg name="depth_topic" value="/camera/depth"/>
+  <arg name="z_depth_topic" value="/camera/z_depth"/>
+
+  <arg name="applyOdomNoise" default="true"/>
+  <arg name="applyDepthNoise" default="true"/>
+
+  <!-- camera parameters -->
+  <arg name="useFov" value="true"/>
+  <arg name="width" value="600"/>
+  <arg name="fovx" value="90"/>
+  <arg name="fovy" value="73.73"/>
+  <arg name="max_range" default="5."/>
+  <arg name="mav_radius" default="0.3"/>
+  <arg name="voxel_size" default="0.1"/>
+  <arg name="x_start" value="-7.5" />
+  <arg name="y_start" value="5.5" />
+  <arg name="z_start" value="1.2" />
+  <arg name="x_size" value="25" />
+  <arg name="y_size" value="25" />
+  <arg name="z_size" value="4.6" />
+  <arg name="origin_x" value="0" />
+  <arg name="origin_y" value="0" />
+  <arg name="origin_z" value="2." />
+  <arg name="p_oc_x" value="0." />
+  <arg name="p_oc_y" value="0." />
+  <arg name="p_oc_z" value="0." />
+  <arg name="p_oc_qx" value="0.0" />
+  <arg name="p_oc_qy" value="0.0" />
+  <arg name="p_oc_qz" value="0." />
+  <arg name="p_oc_qw" value="1." />
+
+  <arg name="enableMapServer" default="true"/>
+  <arg name="enableEsdf" default="false" if="$(arg enableMapServer)" />
+  <arg name="enableEsdf" value="true" unless="$(arg enableMapServer)"/>
+
+  <arg name="map_path" default="/home/anthony/oscar/motion_planning/src/oscar/data/map/cao/oscar_maquette.obj"/>
+
+  <arg name="save_vol_folder" default=""/>
+  <arg name="save_mesh_folder" default="" />
+  <include file="$(find uav_mapper)/launch/rotors_sim_rpg_control.launch">
+    <arg name="z" value="$(arg z_start)" />
+    <arg name="x" value="$(arg x_start)" />
+    <arg name="y" value="$(arg y_start)" />
+	</include>
+
+  <include file="$(find uav_mapper)/launch/splatplanner/splat_cam_map_tsdf.launch">
+    <arg name="mav_name" value="$(arg mav_name)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)" />
+    <arg name="z_depth_topic" value="$(arg z_depth_topic)" />
+    <arg name="uav_gt_odom_topic" value="$(arg uav_gt_odom_topic)" />
+    <arg name="uav_noisy_odom" value="$(arg uav_noisy_odom)" />
+
+    <arg name="cloud_topic" value="$(arg cloud_topic)" />
+    <arg name="voxel_size" value="$(arg voxel_size)" />
+    <arg name="x_size" value="$(arg x_size)" />
+    <arg name="y_size" value="$(arg y_size)" />
+    <arg name="z_size" value="$(arg z_size)" />
+    <arg name="origin_x" value="$(arg origin_x)" />
+    <arg name="origin_y" value="$(arg origin_y)" />
+    <arg name="origin_z" value="$(arg origin_z)" />
+    <arg name="useFov" value="$(arg useFov)" />
+    <arg name="width" value="$(arg width)" />
+    <arg name="fovx" value="$(arg fovx)" />
+    <arg name="fovy" value="$(arg fovy)" />
+    <arg name="max_range" value="$(arg max_range)" />
+    <arg name="map_path" value="$(arg map_path)" />
+    <arg name="save_mesh_folder" value="$(arg save_mesh_folder)" />
+    <arg name="p_oc_x" value="$(arg p_oc_x)" />
+    <arg name="p_oc_z" value="$(arg p_oc_z)" />
+    <arg name="p_oc_y" value="$(arg p_oc_y)" />
+    <arg name="p_oc_qw" value="$(arg p_oc_qw)" />
+    <arg name="p_oc_qx" value="$(arg p_oc_qx)" />
+    <arg name="p_oc_qy" value="$(arg p_oc_qy)" />
+    <arg name="p_oc_qz" value="$(arg p_oc_qz)" />
+    <arg name="esdf_mode" value="0" />
+    <arg name="frontier_mode" value="1" />
+    <arg name="map_debug" value="true" />
+    <arg name="active_esdf" value="$(arg enableEsdf)" />
+
+
+    <arg name="applyDepthNoise" value="$(arg applyDepthNoise)" />
+    <arg name="applyOdomNoise" value="$(arg applyOdomNoise)" />
+
+  </include>
+
+
+  <group if="$(arg enableMapServer)">
+  <node name="map_server_test" pkg="map_core" type="map_server_test" output="screen" >
+    <param name="/map_core/resolution" value="$(arg voxel_size)" />
+   <param name="/map_core/x_size" value="$(arg x_size)" />
+   <param name="/map_core/y_size" value="$(arg y_size)" />
+   <param name="/map_core/z_size" value="$(arg z_size)" />
+   <param name="/map_core/origin_x" value="$(arg origin_x)" />
+   <param name="/map_core/origin_y" value="$(arg origin_y)" />
+   <param name="/map_core/origin_z" value="$(arg origin_z)" />
+   <param name="/map_core/save_folder" value="$(arg save_vol_folder)" />
+
+ </node>
+</group>
+
+</launch>

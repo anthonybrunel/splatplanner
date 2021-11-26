@@ -1,0 +1,72 @@
+<launch>
+
+<arg name="world_name" default="basic"/>
+<arg name="mav_name" default="firefly"/>
+<arg name="gui" default="false"/>
+<arg name="verbose_gazebo" default="false"/>
+
+
+<arg name="traj_topic" value="/firefly/command/trajectory" />
+
+<arg name="voxel_size" default="0.1"/>
+
+
+<arg name="cloud_topic" value="/camera/cloud"/>
+<!-- <arg name="cloud_topic" value="/test_laser/scan_reg"/> -->
+<arg name="odom_topic" value="/camera/odom"/>
+<arg name="depth_topic" value="/camera/depth"/>
+<arg name="uav_gt_odom_topic" value="/ground_truth/odometry"/>
+
+
+<arg name="world_frame" default="world" />
+
+
+
+<!-- Camera param -->
+
+
+<arg name="useFov" value="true"/>
+<arg name="width" value="640"/>
+<arg name="fovx" value="90"/>
+<arg name="fovy" value="60"/>
+<arg name="max_range" default="5."/>
+
+<node name="vk_depth_sim" pkg="ROSVkVizualizer" type="vk_depth_sim" output="screen">
+
+  <!-- publisher -->
+  <remap from="/camera/cloud" to="$(arg cloud_topic)" />
+  <remap from="/camera/odom" to="$(arg odom_topic)" />
+
+  <remap from="/camera/ground_truth/odometry" to="$(arg mav_name)/$(arg uav_gt_odom_topic)" />
+  <param name="/camera/useUavOdom" value="false" />
+  <param name="/camera/model_path" value="/home/anthony/ros_project/motion_planning/src/oscar/data/map/cao/oscar_maquette.obj" />
+  <param name="/camera/useFov" value="$(arg useFov)" />
+  <param name="/camera/width" value="$(arg width)" />
+  <param name="/camera/fovx" value="$(arg fovx)" />
+  <param name="/camera/fovy" value="$(arg fovy)" />
+  <param name="/camera/max_range" value="$(arg max_range)" />
+</node>
+
+<node name="map_test" pkg="map_core" type="map_test" output="screen">
+  <!-- subscriber -->
+  <remap from="/map_core/cloud" to="$(arg cloud_topic)" />
+  <remap from="/map_core/odometry" to="$(arg odom_topic)" />
+  <remap from="/map_core/depth" to="$(arg depth_topic)" />
+
+  <param name="/map_core/resolution" value="$(arg voxel_size)" />
+  <param name="/map_core/x_size" value="25" />
+  <param name="/map_core/y_size" value="25" />
+  <param name="/map_core/z_size" value="5." />
+
+  <param name="/map_core/origin_x" value="0" />
+  <param name="/map_core/origin_y" value="0" />
+  <param name="/map_core/origin_z" value="2." />
+  <param name="/map_core/useFov" value="$(arg useFov)" />
+  <param name="/map_core/width" value="$(arg width)" />
+  <param name="/map_core/fovx" value="$(arg fovx)" />
+  <param name="/map_core/fovy" value="$(arg fovy)" />
+  <param name="/map_core/max_range" value="$(arg max_range)" />
+</node>
+
+
+</launch>
