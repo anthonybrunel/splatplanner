@@ -1,6 +1,7 @@
 # SplatPlanner
 
 We address the problem of autonomous exploration of unknown environments using a Micro Aerial Vehicle (MAV) equipped with an active depth sensor. As such, the task consists in mapping the gradually discovered environment while planning the envisioned trajectories in real-time, using on-board computation only. To do so, we present SplatPlanner, an end-to-end autonomous planner that is based on a novel Permutohedral Frontier Filtering (PFF) which relies on a combination of highly efficient operations stemming from bilateral filtering using permutohedral lattices to guide the entire exploration. 
+
 [![SplatPlanner](https://img.youtube.com/vi/DCcfA2HB1GI/0.jpg)](https://youtu.be/DCcfA2HB1GI)
 ## System requirements
 
