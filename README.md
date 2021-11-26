@@ -21,7 +21,7 @@ PCL ```sudo update && sudo apt install libpcl-dev```
 
 ```
 mkdir -p ~/WORKSPACE/src
-cd ~/flybo_ws
+cd ~/$WORKSPACE/src
 catkin init
 catkin config --extend /opt/ros/"your distrib"
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
@@ -29,14 +29,22 @@ catkin config --merge-devel
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
 
+### External Package required:
+Package to simulate a standard depth camera
+[Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
 
-[Depth Vision](https://github.com/anthonybrunel/vulkan_depth_vision) 
+Grid Mapping package with frontiers extraction and Euclidean distance mmaping
+[Mapping System](https://github.com/anthonybrunel/map_core) 
 
-[Mapping system](https://github.com/anthonybrunel/map_core) 
-
-[glm](https://github.com/g-truc/glm) version 0.9.9.8 is requiered by Depth Vision and the Mapping system package
-
+[glm](https://github.com/g-truc/glm) version 0.9.9.8 is requiered by Depth Camera and the Mapping System package
 
 
-```rosdep install --from-paths WORKSPACE --ignore-src --rosdistro=ROSDISTRO```
+```
+cd ~/WORKSPACE/src
+wstool init . ./$WORKSPACE/splatplanner.rosinstall or wstool merge -t if already init
+wstool update
+rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
+```
+
+
 
