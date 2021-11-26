@@ -6,7 +6,7 @@ We address the problem of autonomous exploration of unknown environments using a
 
 ## System requirements
 
-Ubuntu (20.04) -  CMake: 3.15+ - C++14 compiler
+Ubuntu (20.04) -  CMake: 3.15+ - C++17 compiler
 
 [ROS](http://wiki.ros.org/ROS/Installation) Desktop-Full Install Recommended
 
