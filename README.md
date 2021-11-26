@@ -19,13 +19,15 @@ PCL ```sudo update && sudo apt install libpcl-dev```
 
 ### Workspace Setup:
 
-```mkdir -p ~/WORKSPACE/src
+```
+mkdir -p ~/WORKSPACE/src
 cd ~/flybo_ws
 catkin init
 catkin config --extend /opt/ros/"your distrib"
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin config --merge-devel
-catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3```
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
+```
 
 ### Workspace Setup:
 
