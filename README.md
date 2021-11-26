@@ -23,10 +23,10 @@ PCL ```sudo update && sudo apt install libpcl-dev```
 ### Workspace Setup:
 
 ```
-mkdir -p ~/WORKSPACE/src
+mkdir -p ~/$WORKSPACE/src
 cd ~/$WORKSPACE/src
 catkin init
-catkin config --extend /opt/ros/"your distrib"
+catkin config --extend /opt/ros/noetic
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin config --merge-devel
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
