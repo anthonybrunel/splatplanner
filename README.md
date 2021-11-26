@@ -66,6 +66,8 @@ Please consider citing the following works if you use any of the contents provid
   ADDRESS = {Online, United Kingdom},
   YEAR = {2021}
 }
+```
+```
 @inproceedings{brunel2021splatplanner,
   title={SplatPlanner: Efficient Autonomous Exploration via Permutohedral Frontier Filtering},
   author={Brunel, Anthony and Bourki, Amine and Demonceaux, C{\'e}dric and Strauss, Olivier},
