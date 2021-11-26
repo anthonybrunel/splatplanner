@@ -32,7 +32,7 @@ catkin config --merge-devel
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
 
-### External Package required:
+### External Package Setup:
 Package to simulate a standard depth camera
 
 [Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
