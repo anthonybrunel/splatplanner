@@ -53,3 +53,17 @@ rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
 
 ## Demo
 
+
+## Citation
+
+Please consider citing the following work if you use any of the contents provided by FLYBO:
+
+```
+@inproceedings{brunel2021splatplanner,
+  title={SplatPlanner: Efficient Autonomous Exploration via Permutohedral Frontier Filtering},
+  author={Brunel, Anthony and Bourki, Amine and Demonceaux, C{\'e}dric and Strauss, Olivier},
+  booktitle={IEEE International Conference on Robotics and Automation (ICRA 2021)},
+  year={2021}
+}
+```
+
