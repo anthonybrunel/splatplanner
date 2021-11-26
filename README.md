@@ -8,8 +8,6 @@ We address the problem of autonomous exploration of unknown environments using a
 
 Ubuntu (20.04) -  CMake: 3.15+ - C++14 compiler
 
-```sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade ```
-
 [ROS](http://wiki.ros.org/ROS/Installation) Desktop-Full Install Recommended
 
 [Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page)
