@@ -37,7 +37,7 @@ Package to simulate a standard depth camera
 
 [Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
 
-Grid Mapping package with frontiers extraction and Euclidean distance mmaping
+Grid Mapping package with frontiers extraction and Euclidean distance mapping
 
 [Mapping System](https://github.com/anthonybrunel/map_core) 
 
