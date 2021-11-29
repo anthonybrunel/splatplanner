@@ -55,7 +55,8 @@ wstool update
 **Do not install python3-rosdep2, install python3-rosdep**
 
 ```
-rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
+cd ~/WORKSPACE
+rosdep install --from-paths src --ignore-src -r -y --rosdistro=noetic
 ```
 ## Demo
 
