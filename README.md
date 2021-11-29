@@ -35,7 +35,6 @@ catkin config --merge-devel
 Package to simulate a standard depth camera
 
 [Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
-
 ```git clone git@github.com:anthonybrunel/vulkan_depth_vision.git```
 
 Grid Mapping package with frontiers extraction and Euclidean distance mapping
