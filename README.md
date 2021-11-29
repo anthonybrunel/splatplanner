@@ -24,7 +24,7 @@ PCL ```sudo update && sudo apt install libpcl-dev```
 
 ```
 mkdir -p ~/$WORKSPACE/src
-cd ~/$WORKSPACE/src
+cd ~/$WORKSPACE
 catkin init
 catkin config --extend /opt/ros/noetic
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
