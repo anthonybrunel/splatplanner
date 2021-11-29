@@ -133,6 +133,6 @@
   </node>
 
 
-
+  <node type="rviz" name="rviz_depth_vision" pkg="rviz" args="-d $(find splatplanner)/splatplanner_cfg.rviz"/>
 
 </launch>
