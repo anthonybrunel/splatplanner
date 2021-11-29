@@ -1,0 +1,68 @@
+<launch>
+
+  <!-- Params for Gazebo and a mav from rotors-->
+<arg name="world_path" default="$(find rotors_gazebo)/worlds/basic.world"/>
+<arg name="quad_name" default="hummingbird"/>
+<arg name="mav_name" default="$(arg quad_name)"/>
+<arg name="world_name" default="$(find rotors_gazebo)/worlds/basic.world"/>
+<arg name="use_mpc" default="false"/>
+<arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo"/>
+
+<arg name="gui" default="false"/>
+<arg name="verbose" default="false"/>
+<arg name="paused" default="true"/>
+<arg name="reference_frame" default="world"/>
+<arg name="world_frame" default="world" />
+<arg name="sampling_time" default="0.01"/>
+<arg name="traj_topic" default="$(arg mav_name)/command/trajectory" />
+<arg name="enable_logging" default="false" />
+<arg name="enable_ground_truth" default="true" />
+<arg name="log_file" default="$(arg mav_name)" />
+<arg name="use_ground_truth" value="true"/>
+<arg name="enable_command_feedthrough" default="false"/>
+
+
+<arg name="uav_gt_odom_topic" default="$(arg mav_name)/ground_truth/odometry"/>
+<arg name="uav_noisy_odom" value="/camera/noisy_odom"/>
+
+
+<arg name="x" default="0" />
+<arg name="y" default="0" />
+<arg name="z" default="1.18" />
+
+
+<include file="$(find splatplanner)/launch/setup/quad_sim.launch">
+  <arg name="quad_name" value="$(arg quad_name)"/>
+  <arg name="world_name" value="$(arg world_name)"/>
+  <arg name="paused" value="$(arg paused)"/>
+  <arg name="gui" value="$(arg gui)"/>
+  <arg name="noisy_odom" value="$(arg uav_noisy_odom)"/>
+
+
+  <arg name="use_ground_truth" value="$(arg use_ground_truth)"/>
+  <arg name="use_mpc" value="$(arg use_mpc)"/>
+  <arg name="enable_command_feedthrough" value="$(arg enable_command_feedthrough)" />
+
+  <arg name="mav_name" value="$(arg mav_name)"/>
+  <arg name="model" value="$(arg model)"/>
+  <arg name="enable_logging" value="$(arg enable_logging)"/>
+  <arg name="enable_ground_truth" value="$(arg enable_ground_truth)"/>
+  <arg name="log_file" value="$(arg log_file)"/>
+  <arg name="verbose" default="$(arg verbose)"/>
+  <arg name="debug" default="false"/>
+
+  <arg name="x_init" value="$(arg x)"/>
+  <arg name="y_init" value="$(arg y)"/>
+</include>
+
+<node name="rotors_rpg_sim_setup" pkg="splatplanner" type="rotors_rpg_sim_setup.py" output="screen">
+  <param name="ns_mav" value="/$(arg mav_name)" />
+  <param name="ns_gazebo" value="/gazebo" />
+  <remap from="autopilot/odometry" to="$(arg uav_noisy_odom)" />
+  <rosparam param="initial_position" subst_value="True"> [$(arg x),$(arg y),$(arg z)] </rosparam>
+</node>
+
+
+
+
+</launch>
