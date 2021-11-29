@@ -50,7 +50,7 @@ cd ~/WORKSPACE/src
 git clone git@github.com:anthonybrunel/splatplanner.git
 wstool init . ./splatplanner/splatplanner_ssh.rosinstall or wstool merge -t if already init
 wstool update
-rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
+rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic **(do not install python3-rosdep2, install python3-rosdep)**
 ```
 
 ## Demo
