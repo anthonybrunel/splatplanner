@@ -27,9 +27,8 @@ mkdir -p ~/$WORKSPACE/src
 cd ~/$WORKSPACE/src
 catkin init
 catkin config --extend /opt/ros/noetic
-catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
-catkin config --merge-devel
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
+catkin config --merge-devel
 ```
 
 ### External Packages Setup:
