@@ -57,7 +57,11 @@ wstool update
 ```
 cd ~/WORKSPACE
 rosdep install --from-paths src --ignore-src -r -y --rosdistro=noetic
+catkin build
 ```
+
+
+
 ## Demo
 
 
