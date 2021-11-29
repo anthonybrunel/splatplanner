@@ -48,7 +48,7 @@ Grid Mapping package with frontiers extraction and Euclidean distance mapping
 ```
 cd ~/WORKSPACE/src
 git clone git@github.com:anthonybrunel/splatplanner.git
-wstool init . ./splatplanner/splatplanner.rosinstall or wstool merge -t if already init
+wstool init . ./splatplanner/splatplanner_ssh.rosinstall or wstool merge -t if already init
 wstool update
 rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
 ```
