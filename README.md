@@ -24,7 +24,7 @@ PCL ```sudo update && sudo apt install libpcl-dev```
 
 ```
 mkdir -p ~/$WORKSPACE/src
-cd ~/$WORKSPACE/src
+cd ~/$WORKSPACE
 catkin init
 catkin config --extend /opt/ros/noetic
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
@@ -35,20 +35,32 @@ catkin config --merge-devel
 Package to simulate a standard depth camera
 
 [Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
+```git clone git@github.com:anthonybrunel/vulkan_depth_vision.git```
 
 Grid Mapping package with frontiers extraction and Euclidean distance mapping
 
 [Mapping System](https://github.com/anthonybrunel/map_core) 
+```git clone git@github.com:anthonybrunel/map_core.git```
 
 [glm](https://github.com/g-truc/glm) version 0.9.9.8 is requiered by Depth Camera and the Mapping System package
 
 
 ```
 cd ~/WORKSPACE/src
-wstool init . ./$WORKSPACE/splatplanner.rosinstall or wstool merge -t if already init
+git clone git@github.com:anthonybrunel/splatplanner.git
+wstool init . ./splatplanner/splatplanner_ssh.rosinstall or wstool merge -t if already init
 wstool update
-rosdep install --from-paths $WORKSPACE --ignore-src --rosdistro=noetic
 ```
+
+**Do not install python3-rosdep2, install python3-rosdep**
+
+```
+cd ~/WORKSPACE
+rosdep install --from-paths src --ignore-src -r -y --rosdistro=noetic
+catkin build
+```
+
+
 
 ## Demo
 
