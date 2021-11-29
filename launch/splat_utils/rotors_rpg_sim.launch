@@ -50,7 +50,7 @@
 
 </include>
 
-<node name="rotors_rpg_sim_setup" pkg="mav_sim_helper" type="rotors_rpg_sim_setup.py" output="screen">
+<node name="rotors_rpg_sim_setup" pkg="splatplanner" type="rotors_rpg_sim_setup.py" output="screen">
   <param name="ns_mav" value="/$(arg mav_name)" />
   <param name="ns_gazebo" value="/gazebo" />
   <remap from="autopilot/odometry" to="$(arg uav_noisy_odom)" />

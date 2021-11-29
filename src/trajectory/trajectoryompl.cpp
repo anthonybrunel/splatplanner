@@ -1,9 +1,9 @@
 #include "../../include/trajectory/trajectoryompl.h"
 
-#include "../../../../map_core/utils/boundingmap.hpp"
+#include "map_core/../../utils/boundingmap.hpp"
 #include <ompl/geometric/planners/rrt/InformedRRTstar.h>
 #include  <ompl/geometric/planners/informedtrees/AITstar.h>
-#include "../../../../map_core/utils/timer.hpp"
+#include "map_core/../../utils/timer.hpp"
 #include <ompl/geometric/planners/AnytimePathShortening.h>
 #include <ompl/geometric/PathSimplifier.h>
 #include <ompl/geometric/planners/rrt/RRTXstatic.h>

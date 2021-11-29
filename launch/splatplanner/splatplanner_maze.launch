@@ -48,11 +48,12 @@
   <arg name="p_oc_qz" value="0." />
   <arg name="p_oc_qw" value="1." />
 
+  <arg name="map_path" default="$(find vulkan_depth_vision)/maze/maze.obj"/>
 
   <!-- Logging bench -->
-  <arg name="save_mesh_folder" value="$(find splatplanner)/maze/mesh" />
-  <arg name="save_vol_folder" value="$(find splatplanner)/maze/vol" />
-  <arg name="save_log_folder" value="$(find splatplanner)/maze/log" />
+  <arg name="save_mesh_folder" value="$(find splatplanner)/data/maze/mesh" />
+  <arg name="save_vol_folder" value="$(find splatplanner)/data/maze/vol" />
+  <arg name="save_log_folder" value="$(find splatplanner)/data/maze/log" />
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="tf_base_to_cam" args="0 0 0.0 0 0 0 world tf_wc"/>
 

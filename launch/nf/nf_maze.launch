@@ -50,15 +50,16 @@
   <arg name="p_oc_qy" value="0.0" />
   <arg name="p_oc_qz" value="0." />
   <arg name="p_oc_qw" value="1." />
-  <arg name="map_path" default="/home/anthony/oscar/motion_planning/src/oscar/data/map/$(arg scene)/$(arg scene).obj"/>
 
-  <arg name="save_vol_folder" value="/home/anthony/oscar/motion_planning/src/oscar/data/$(arg method)/$(arg scene)/vol" />
-  <arg name="save_log_folder" value="/home/anthony/oscar/motion_planning/src/oscar/data/$(arg method)/$(arg scene)/log" />
-  <arg name="save_mesh_folder" value="/home/anthony/oscar/motion_planning/src/oscar/data/$(arg method)/$(arg scene)/mesh" />
+    <arg name="map_path" default="$(find vulkan_depth_vision)/maze/maze.obj"/>
 
+    <!-- Logging bench -->
+    <arg name="save_mesh_folder" value="$(find splatplanner)/data/maze/mesh" />
+    <arg name="save_vol_folder" value="$(find splatplanner)/data/maze/vol" />
+    <arg name="save_log_folder" value="$(find splatplanner)/data/maze/log" />
 
   <!-- gazebo -->
-  <include file="$(find uav_mapper)/launch/rotors_sim_rpg_control.launch">
+  <include file="$(find splatplanner)/launch/rotors_sim_rpg_control.launch">
     <arg name="z" value="$(arg z_start)" />
     <arg name="x" value="$(arg x_start)" />
     <arg name="y" value="$(arg y_start)" />
@@ -66,7 +67,7 @@
 
 
 
-  <include file="$(find uav_mapper)/launch/splatplanner/splat_cam_map_tsdf.launch">
+  <include file="$(find splatplanner)/launch/splatplanner/splat_cam_map_tsdf.launch">
     <arg name="mav_name" value="$(arg mav_name)"/>
     <arg name="odom_topic" value="$(arg odom_topic)" />
 
@@ -107,7 +108,7 @@
 
 
 
-  <node name="planner" pkg="uav_mapper" type="nfplanner_node" output="screen" >
+  <node name="planner" pkg="splatplanner" type="nfplanner_node" output="screen" >
 
     <remap from="/planner/uav_odom" to="$(arg uav_noisy_odom)" />
     <remap from="/planner/command/trajectory" to="/$(arg traj_topic)" />
