@@ -86,4 +86,24 @@ Please consider citing the following works if you use any of the contents provid
   year={2021}
 }
 ```
+```
+@inproceedings{yamauchi1997frontier,
+  title={A frontier-based approach for autonomous exploration},
+  author={Yamauchi, Brian},
+  booktitle={Proceedings 1997 IEEE International Symposium on Computational Intelligence in Robotics and Automation CIRA'97.'Towards New Computational Principles for Robotics and Automation'},
+  pages={146--151},
+  year={1997},
+  organization={IEEE}
+}
+```
+```
+@inproceedings{cieslewski2017rapid,
+  title={Rapid exploration with multi-rotors: A frontier selection method for high speed flight},
+  author={Cieslewski, Titus and Kaufmann, Elia and Scaramuzza, Davide},
+  booktitle={2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={2135--2142},
+  year={2017},
+  organization={IEEE}
+}
+```
 
