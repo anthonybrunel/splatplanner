@@ -79,7 +79,7 @@ Please consider citing the following works if you use any of the contents provid
 }
 ```
 ```
-@inproceedings{brunel2021splatplanner,
+@inproceedings{BrunelICRA2021,
   title={SplatPlanner: Efficient Autonomous Exploration via Permutohedral Frontier Filtering},
   author={Brunel, Anthony and Bourki, Amine and Demonceaux, C{\'e}dric and Strauss, Olivier},
   booktitle={IEEE International Conference on Robotics and Automation (ICRA 2021)},
