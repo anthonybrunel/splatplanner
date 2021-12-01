@@ -67,7 +67,7 @@ catkin build
 
 ## Citation
 
-Please consider citing the following works if you use any of the contents provided by FLYBO:
+Please consider citing the following works if you use any of the contents provided by this specific subpart of FLYBO:
 
 ```
 @inproceedings{Brunel3DV2021,
