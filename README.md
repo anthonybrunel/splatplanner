@@ -62,7 +62,22 @@ catkin build
 
 
 
-## Demo
+## Examples
+
+**SplatPlanner**
+```
+roslaunch splatplanner splatplanner_maze.launch
+```
+
+**Classic**
+```
+roslaunch splatplanner nf_maze.launch
+```
+
+**Rapid**
+```
+roslaunch splatplanner rapid_frontier_maze.launch
+```
 
 
 ## Citation
