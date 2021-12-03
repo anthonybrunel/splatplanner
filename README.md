@@ -10,7 +10,7 @@ Installation instructions are provided in the [FLYBO wiki](https://github.com/an
 
 ## Citation
 
-Please consider citing the following works if you use any of the contents provided by this specific subpart of FLYBO:
+Please consider citing the following works if you use any of the contents provided by this specific subpart of FLYBO [IEEE | ArXiv | Video]:
 
 ```
 @inproceedings{Brunel3DV2021,
