@@ -4,81 +4,9 @@ We address the problem of autonomous exploration of unknown environments using a
 
 [![SplatPlanner](https://img.youtube.com/vi/DCcfA2HB1GI/0.jpg)](https://youtu.be/DCcfA2HB1GI)
 
-## System requirements
+# Installation
 
-Ubuntu (20.04) -  CMake: 3.15+ - C++17 compiler
-
-[ROS](http://wiki.ros.org/ROS/Installation) Desktop-Full Install Recommended
-
-[Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page)
-
-PCL ```sudo update && sudo apt install libpcl-dev```
-
-[TBB](https://github.com/oneapi-src/oneTBB) version 2020.1-2 ```sudo update && sudo apt install libtbb-dev```
-
-```sudo apt-get install libgoogle-glog-dev```
-
-## Installation
-
-### Workspace Setup:
-
-```
-mkdir -p ~/$WORKSPACE/src
-cd ~/$WORKSPACE
-catkin init
-catkin config --extend /opt/ros/noetic
-catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
-catkin config --merge-devel
-```
-
-### Packages Setup:
-Package to simulate a standard depth camera
-
-[Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
-```git clone git@github.com:anthonybrunel/vulkan_depth_vision.git```
-
-Grid Mapping package with frontiers extraction and Euclidean distance mapping
-
-[Mapping System](https://github.com/anthonybrunel/map_core) 
-```git clone git@github.com:anthonybrunel/map_core.git```
-
-[glm](https://github.com/g-truc/glm) version 0.9.9.8 is requiered by Depth Camera and the Mapping System package
-
-
-```
-cd ~/WORKSPACE/src
-git clone git@github.com:anthonybrunel/splatplanner.git
-wstool init . ./splatplanner/splatplanner_ssh.rosinstall or wstool merge -t if already init
-wstool update
-```
-
-**Do not install python3-rosdep2, install python3-rosdep**
-
-```
-cd ~/WORKSPACE
-rosdep install --from-paths src --ignore-src -r -y --rosdistro=noetic
-catkin build
-```
-
-
-
-## Examples
-
-**SplatPlanner**
-```
-roslaunch splatplanner splatplanner_maze.launch
-```
-
-**Classic**
-```
-roslaunch splatplanner nf_maze.launch
-```
-
-**Rapid**
-```
-roslaunch splatplanner rapid_frontier_maze.launch
-```
-
+Installation instructions are provided in the [FLYBO wiki](https://github.com/anthonybrunel/FLYBO/wiki). Feel free to create an issues if you have any questions or problems related to this package.
 
 ## Citation
 
