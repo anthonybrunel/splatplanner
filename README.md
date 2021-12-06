@@ -34,6 +34,8 @@ SplatPlanner: [IEEE](https://ieeexplore.ieee.org/document/9560896), [HAL](https:
   year={2021}
 }
 ```
+Classic Frontier
+
 ```
 @inproceedings{yamauchi1997frontier,
   title={A frontier-based approach for autonomous exploration},
@@ -44,6 +46,8 @@ SplatPlanner: [IEEE](https://ieeexplore.ieee.org/document/9560896), [HAL](https:
   organization={IEEE}
 }
 ```
+Rapid Frontier
+
 ```
 @inproceedings{cieslewski2017rapid,
   title={Rapid exploration with multi-rotors: A frontier selection method for high speed flight},
