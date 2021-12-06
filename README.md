@@ -14,7 +14,7 @@ Installation instructions are provided in the [FLYBO wiki](https://github.com/an
 
 Please consider citing the following works if you use any of the contents provided by this specific subpart of [FLYBO](https://github.com/anthonybrunel/FLYBO):
 
-[IEEE](), [HAL](https://hal.archives-ouvertes.fr/hal-03380109)
+FLYBO: [HAL](https://hal.archives-ouvertes.fr/hal-03380109)
 ```
 @inproceedings{Brunel3DV2021,
   TITLE = {FLYBO: A Unified Benchmark Environment for Autonomous Flying Robots},
@@ -24,7 +24,7 @@ Please consider citing the following works if you use any of the contents provid
   YEAR = {2021}
 }
 ```
-[IEEE](https://ieeexplore.ieee.org/document/9560896), [HAL](https://hal.archives-ouvertes.fr/hal-03175707), [Video](https://youtu.be/DCcfA2HB1GI)
+SplatPlanner: [IEEE](https://ieeexplore.ieee.org/document/9560896), [HAL](https://hal.archives-ouvertes.fr/hal-03175707), [Video](https://youtu.be/DCcfA2HB1GI)
 
 ```
 @inproceedings{BrunelICRA2021,
