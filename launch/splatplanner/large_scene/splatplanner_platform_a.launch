@@ -1,49 +1,61 @@
 <launch>
+
   <arg name="method" value="splatplanner"/>
-  <arg name="scene" value="maze"/>
+  <arg name="scene" value="platform_a"/>
 
 
-  <!-- gazebo-rotors arguments -->
-  <arg name="quad_name" value="hummingbird"/>
-  <arg name="mav_name" value="$(arg quad_name)"/>
+  <arg name="quad_name" default="hummingbird"/>
+  <arg name="mav_name" default="$(arg quad_name)"/>
 
-  <arg name="gui" value="false"/>
-  <arg name="verbose" value="false"/>
-  <arg name="paused" value="true"/>
-  <arg name="reference_frame" value="world"/>
-  <arg name="world_frame" value="world" />
-  <arg name="world_name" value="$(find rotors_gazebo)/worlds/basic.world"/>
+  <arg name="gui" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="paused" default="true"/>
+  <arg name="reference_frame" default="world"/>
+  <arg name="world_frame" default="world" />
+  <arg name="world_name" default="$(find rotors_gazebo)/worlds/basic.world"/>
 
   <arg name="uav_gt_odom_topic" value="$(arg mav_name)/ground_truth/odometry"/>
   <arg name="uav_noisy_odom" value="/camera/noisy_odom"/>
 
 
-  <arg name="traj_topic" value="/hummingbird/autopilot/reference_state" />
+  <arg name="traj_topic" default="/hummingbird/autopilot/reference_state" />
 
   <arg name="cloud_topic" value="/camera/cloud"/>
   <arg name="odom_topic" value="/camera/odom"/>
   <arg name="depth_topic" value="/camera/depth"/>
   <arg name="z_depth_topic" value="/camera/z_depth"/>
 
+
+  <arg name="mav_radius" default="0.3"/>
+
   <!-- camera parameters -->
   <arg name="useFov" value="true"/>
   <arg name="width" value="600"/>
-  <arg name="fovx" value="90"/>
-  <arg name="fovy" value="73.73"/>
-  <arg name="max_range" default="5."/>
-  <arg name="mav_radius" default="0.3"/>
+  <arg name="fovx" value="115"/>
+  <arg name="fovy" value="99.3"/>
+  <arg name="max_range" default="7."/>
 
 
   <arg name="voxel_size" default="0.1"/>
-  <arg name="x_start" value="0" />
+
+  <!-- <arg name="x_start" value="0" />
   <arg name="y_start" value="0" />
-  <arg name="z_start" value="1.2" />
-  <arg name="x_size" value="20.2" />
-  <arg name="y_size" value="20.2" />
-  <arg name="z_size" value="2.5" />
+  <arg name="z_start" value="1.18" />
+  <arg name="x_size" value="10" />
+  <arg name="y_size" value="14" />
+  <arg name="z_size" value="4" />
   <arg name="origin_x" value="0" />
   <arg name="origin_y" value="0" />
-  <arg name="origin_z" value="1.2" />
+  <arg name="origin_z" value="1.9" /> -->
+  <arg name="x_start" value="0" />
+  <arg name="y_start" value="5" />
+  <arg name="z_start" value="1.2" />
+  <arg name="x_size" value="16" />
+  <arg name="y_size" value="24" />
+  <arg name="z_size" value="9" />
+  <arg name="origin_x" value="0" />
+  <arg name="origin_y" value="0" />
+  <arg name="origin_z" value="4.2" />
   <arg name="p_oc_x" value="0." />
   <arg name="p_oc_y" value="0." />
   <arg name="p_oc_z" value="0." />
@@ -52,23 +64,21 @@
   <arg name="p_oc_qz" value="0." />
   <arg name="p_oc_qw" value="1." />
 
-  <arg name="map_path" default="$(find flybo_utils)/resources/datasets/FLYBO_Datasets/Maze/maze.obj"/>
+  <arg name="map_path" default="$(find flybo_utils)/resources/datasets/FLYBO_Datasets/Platform_A/Platform_A.obj"/>
 
   <arg name="save_mesh_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/mesh" />
   <arg name="save_vol_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/vol" />
   <arg name="save_log_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/log" />
 
 
-
+  <!-- gazebo -->
   <include file="$(find flybo_utils)/resources/launch/utils_launch/rotors_sim_rpg_control.launch">
     <arg name="z" value="$(arg z_start)" />
     <arg name="x" value="$(arg x_start)" />
     <arg name="y" value="$(arg y_start)" />
-	</include>
+  </include>
 
-
-
-  <include file="$(find flybo_utils)/resources/launch/utils_launch/cam_map_tsdf.launch">
+  <include file="$(find splatplanner)/launch/splatplanner/splat_cam_map_tsdf.launch">
     <arg name="mav_name" value="$(arg mav_name)"/>
     <arg name="odom_topic" value="$(arg odom_topic)" />
     <arg name="z_depth_topic" value="$(arg z_depth_topic)" />
@@ -103,41 +113,43 @@
     <arg name="active_esdf" value="true" />
   </include>
 
+
   <node name="planner" pkg="splatplanner" type="splatplanner_node" output="screen" >
-  <!-- publisher -->
-  <remap from="/planner/uav_odom" to="$(arg uav_noisy_odom)" />
-  <remap from="/planner/command/trajectory" to="/$(arg traj_topic)" />
-  <remap from="/planner/depth_odom" to="$(arg odom_topic)" />
+    <!-- publisher -->
+    <remap from="/planner/uav_odom" to="$(arg uav_gt_odom_topic)" />
+    <remap from="/planner/command/trajectory" to="/$(arg traj_topic)" />
+    <remap from="/planner/depth_odom" to="$(arg odom_topic)" />
 
-  <param name="/max_v" value="1.5" />
-  <param name="/max_a" value="2.5" />
-  <param name="/max_yaw_vel" value="1.5707" />
-  <param name="/max_yaw_acc" value="1.5707" />
-  <param name="/mav_radius" value="0.3" />
-  <param name="/RRT_max_distance" value="2.5" />
+    <param name="/max_v" value="1.5" />
+    <param name="/max_a" value="2.5" />
+    <param name="/max_yaw_vel" value="1.5707" />
+    <param name="/max_yaw_acc" value="1.5707" />
+    <param name="/mav_radius" value="0.3" />
+    <param name="/RRT_max_distance" value="2.5" />
 
-  <param name="/map_core/resolution" value="$(arg voxel_size)" />
-  <param name="/map_core/x_size" value="$(arg x_size)" />
-  <param name="/map_core/y_size" value="$(arg y_size)" />
-  <param name="/map_core/z_size" value="$(arg z_size)" />
-  <param name="/map_core/origin_x" value="$(arg origin_x)" />
-  <param name="/map_core/origin_y" value="$(arg origin_y)" />
-  <param name="/map_core/origin_z" value="$(arg origin_z)" />
-  <param name="/map_core/esdf_mode" value="0" />
-  <param name="/camera/fovx" value="$(arg fovx)" />
-  <param name="/camera/fovy" value="$(arg fovy)" />
-  <param name="/camera/max_range" value="$(arg max_range)" />
-  <param name="/camera/oc_x" value="$(arg p_oc_x)" />
-  <param name="/camera/oc_y" value="$(arg p_oc_z)" />
-  <param name="/camera/oc_z" value="$(arg p_oc_y)" />
-  <param name="/camera/oc_qw" value="$(arg p_oc_qw)" />
-  <param name="/camera/oc_qx" value="$(arg p_oc_qx)" />
-  <param name="/camera/oc_qy" value="$(arg p_oc_qy)" />
-  <param name="/camera/oc_qz" value="$(arg p_oc_qz)" />
-  <param name="/map_core/save_folder" value="$(arg save_vol_folder)" />
-  <param name="/planner/save_log_folder" value="$(arg save_log_folder)" />
+    <param name="/map_core/resolution" value="$(arg voxel_size)" />
+    <param name="/map_core/x_size" value="$(arg x_size)" />
+    <param name="/map_core/y_size" value="$(arg y_size)" />
+    <param name="/map_core/z_size" value="$(arg z_size)" />
+    <param name="/map_core/origin_x" value="$(arg origin_x)" />
+    <param name="/map_core/origin_y" value="$(arg origin_y)" />
+    <param name="/map_core/origin_z" value="$(arg origin_z)" />
+    <param name="/map_core/esdf_mode" value="0" />
+    <param name="/camera/fovx" value="$(arg fovx)" />
+    <param name="/camera/fovy" value="$(arg fovy)" />
+    <param name="/camera/max_range" value="$(arg max_range)" />
+    <param name="/camera/oc_x" value="$(arg p_oc_x)" />
+    <param name="/camera/oc_y" value="$(arg p_oc_z)" />
+    <param name="/camera/oc_z" value="$(arg p_oc_y)" />
+    <param name="/camera/oc_qw" value="$(arg p_oc_qw)" />
+    <param name="/camera/oc_qx" value="$(arg p_oc_qx)" />
+    <param name="/camera/oc_qy" value="$(arg p_oc_qy)" />
+    <param name="/camera/oc_qz" value="$(arg p_oc_qz)" />
+    <param name="/map_core/save_folder" value="$(arg save_vol_folder)" />
+    <param name="/planner/save_log_folder" value="$(arg save_log_folder)" />
 
-</node>
+  </node>
+
 
 
 </launch>

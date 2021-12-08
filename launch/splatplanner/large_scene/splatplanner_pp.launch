@@ -1,6 +1,8 @@
 <launch>
+
   <arg name="method" value="splatplanner"/>
-  <arg name="scene" value="maze"/>
+  <arg name="scene" value="pp"/>
+
 
 
   <!-- gazebo-rotors arguments -->
@@ -17,7 +19,6 @@
   <arg name="uav_gt_odom_topic" value="$(arg mav_name)/ground_truth/odometry"/>
   <arg name="uav_noisy_odom" value="/camera/noisy_odom"/>
 
-
   <arg name="traj_topic" value="/hummingbird/autopilot/reference_state" />
 
   <arg name="cloud_topic" value="/camera/cloud"/>
@@ -26,24 +27,23 @@
   <arg name="z_depth_topic" value="/camera/z_depth"/>
 
   <!-- camera parameters -->
+  <arg name="mav_radius" default="0.3"/>
   <arg name="useFov" value="true"/>
   <arg name="width" value="600"/>
-  <arg name="fovx" value="90"/>
-  <arg name="fovy" value="73.73"/>
-  <arg name="max_range" default="5."/>
-  <arg name="mav_radius" default="0.3"/>
+  <arg name="fovx" value="115"/>
+  <arg name="fovy" value="99.3"/>
+  <arg name="max_range" default="7."/>
 
-
-  <arg name="voxel_size" default="0.1"/>
-  <arg name="x_start" value="0" />
-  <arg name="y_start" value="0" />
+  <arg name="voxel_size" default="0.2"/>
+  <arg name="x_start" value="-8" />
+  <arg name="y_start" value="8" />
   <arg name="z_start" value="1.2" />
-  <arg name="x_size" value="20.2" />
-  <arg name="y_size" value="20.2" />
-  <arg name="z_size" value="2.5" />
+  <arg name="x_size" value="31" />
+  <arg name="y_size" value="33" />
+  <arg name="z_size" value="26." />
   <arg name="origin_x" value="0" />
   <arg name="origin_y" value="0" />
-  <arg name="origin_z" value="1.2" />
+  <arg name="origin_z" value="12.7" />
   <arg name="p_oc_x" value="0." />
   <arg name="p_oc_y" value="0." />
   <arg name="p_oc_z" value="0." />
@@ -52,21 +52,19 @@
   <arg name="p_oc_qz" value="0." />
   <arg name="p_oc_qw" value="1." />
 
-  <arg name="map_path" default="$(find flybo_utils)/resources/datasets/FLYBO_Datasets/Maze/maze.obj"/>
+  <arg name="map_path" default="$(find flybo_utils)/resources/datasets/FLYBO_Datasets/Powerplant/Powerplant.obj"/>
 
   <arg name="save_mesh_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/mesh" />
   <arg name="save_vol_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/vol" />
   <arg name="save_log_folder" value="$(find flybo_utils)/resources/flybo_eval/$(arg method)/$(arg scene)/log" />
 
-
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_base_to_cam" args="0 0 0.0 0 0 0 world tf_wc"/>
 
   <include file="$(find flybo_utils)/resources/launch/utils_launch/rotors_sim_rpg_control.launch">
     <arg name="z" value="$(arg z_start)" />
     <arg name="x" value="$(arg x_start)" />
     <arg name="y" value="$(arg y_start)" />
-	</include>
-
-
+  </include>
 
   <include file="$(find flybo_utils)/resources/launch/utils_launch/cam_map_tsdf.launch">
     <arg name="mav_name" value="$(arg mav_name)"/>
@@ -74,6 +72,7 @@
     <arg name="z_depth_topic" value="$(arg z_depth_topic)" />
     <arg name="uav_gt_odom_topic" value="$(arg uav_gt_odom_topic)" />
     <arg name="uav_noisy_odom" value="$(arg uav_noisy_odom)" />
+
 
     <arg name="cloud_topic" value="$(arg cloud_topic)" />
     <arg name="voxel_size" value="$(arg voxel_size)" />
@@ -114,7 +113,11 @@
   <param name="/max_yaw_vel" value="1.5707" />
   <param name="/max_yaw_acc" value="1.5707" />
   <param name="/mav_radius" value="0.3" />
-  <param name="/RRT_max_distance" value="2.5" />
+
+  <param name="/mav_radius" value="0.3" />
+
+  <param name="/RRT_max_distance" value="3.5" />
+
 
   <param name="/map_core/resolution" value="$(arg voxel_size)" />
   <param name="/map_core/x_size" value="$(arg x_size)" />

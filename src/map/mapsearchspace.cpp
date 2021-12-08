@@ -91,9 +91,6 @@ bool MapSearchSpace::checkOcclusion(const Eigen::Vector3f &pos, const Eigen::Vec
     dz2 = n << 1;
     uint8_t tmp;
 
-    float min_dist = 5;
-
-
 
 
     if ((l >= m) && (l >= n)) {

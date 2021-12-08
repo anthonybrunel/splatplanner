@@ -28,19 +28,6 @@ include_directories(
 
 
 
-#add_library(poly_traj
-#    include/poly_traj/polytrajexecutor.h
-#    src/poly_traj/polytrajexecutor.cpp
-
-
-
-#    include/poly_traj/optimalsmalltraj.h
-#    src/poly_traj/optimalsmalltraj.cpp
-#    include/utils/timer.hpp
-
-#    include/trajectory/quinticbezieropt.h
-#    src/trajectory/quinticbezieropt.cpp
-#    )
 
 
 
