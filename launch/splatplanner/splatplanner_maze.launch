@@ -2,7 +2,6 @@
   <arg name="method" value="splatplanner"/>
   <arg name="scene" value="maze"/>
 
-
   <!-- gazebo-rotors arguments -->
   <arg name="quad_name" value="hummingbird"/>
   <arg name="mav_name" value="$(arg quad_name)"/>

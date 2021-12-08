@@ -1,74 +1,20 @@
-# SplatPlanner
+# SplatPlanner, Classic and Rapid Frontier
 
-We address the problem of autonomous exploration of unknown environments using a Micro Aerial Vehicle (MAV) equipped with an active depth sensor. As such, the task consists in mapping the gradually discovered environment while planning the envisioned trajectories in real-time, using on-board computation only. To do so, we present SplatPlanner, an end-to-end autonomous planner that is based on a novel Permutohedral Frontier Filtering (PFF) which relies on a combination of highly efficient operations stemming from bilateral filtering using permutohedral lattices to guide the entire exploration. 
+We address the problem of autonomous exploration of unknown environments using a Micro Aerial Vehicle (MAV) equipped with an active depth sensor. As such, the task consists in mapping the gradually discovered environment while planning the envisioned trajectories in real-time, using on-board computation only. To do so, we present SplatPlanner, an end-to-end autonomous planner that is based on a novel Permutohedral Frontier Filtering (PFF) which relies on a combination of highly efficient operations stemming from bilateral filtering using permutohedral lattices to guide the entire exploration.
 
-[![SplatPlanner](https://img.youtube.com/vi/DCcfA2HB1GI/0.jpg)](https://youtu.be/DCcfA2HB1GI)
+<p align="center">
+  <img src="https://github.com/anthonybrunel/splatplanner/blob/main/Splat.gif">
+</p>
 
-## System requirements
+# Installation
 
-Ubuntu (20.04) -  CMake: 3.15+ - C++17 compiler
-
-[ROS](http://wiki.ros.org/ROS/Installation) Desktop-Full Install Recommended
-
-[Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page)
-
-PCL ```sudo update && sudo apt install libpcl-dev```
-
-[TBB](https://github.com/oneapi-src/oneTBB) version 2020.1-2 ```sudo update && sudo apt install libtbb-dev```
-
-```sudo apt-get install libgoogle-glog-dev```
-
-## Installation
-
-### Workspace Setup:
-
-```
-mkdir -p ~/$WORKSPACE/src
-cd ~/$WORKSPACE
-catkin init
-catkin config --extend /opt/ros/noetic
-catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
-catkin config --merge-devel
-```
-
-### External Packages Setup:
-Package to simulate a standard depth camera
-
-[Depth Camera](https://github.com/anthonybrunel/vulkan_depth_vision) 
-```git clone git@github.com:anthonybrunel/vulkan_depth_vision.git```
-
-Grid Mapping package with frontiers extraction and Euclidean distance mapping
-
-[Mapping System](https://github.com/anthonybrunel/map_core) 
-```git clone git@github.com:anthonybrunel/map_core.git```
-
-[glm](https://github.com/g-truc/glm) version 0.9.9.8 is requiered by Depth Camera and the Mapping System package
-
-
-```
-cd ~/WORKSPACE/src
-git clone git@github.com:anthonybrunel/splatplanner.git
-wstool init . ./splatplanner/splatplanner_ssh.rosinstall or wstool merge -t if already init
-wstool update
-```
-
-**Do not install python3-rosdep2, install python3-rosdep**
-
-```
-cd ~/WORKSPACE
-rosdep install --from-paths src --ignore-src -r -y --rosdistro=noetic
-catkin build
-```
-
-
-
-## Demo
-
+Installation instructions are provided in the [FLYBO wiki](https://github.com/anthonybrunel/FLYBO/wiki). Feel free to create an issue if you have any questions or problems related to this package.
 
 ## Citation
 
-Please consider citing the following works if you use any of the contents provided by FLYBO:
+Please consider citing the following works if you use any of the contents provided by this specific subpart of [FLYBO](https://github.com/anthonybrunel/FLYBO):
 
+FLYBO: [HAL](https://hal.archives-ouvertes.fr/hal-03380109)
 ```
 @inproceedings{Brunel3DV2021,
   TITLE = {FLYBO: A Unified Benchmark Environment for Autonomous Flying Robots},
@@ -78,12 +24,39 @@ Please consider citing the following works if you use any of the contents provid
   YEAR = {2021}
 }
 ```
+
+SplatPlanner: [IEEE](https://ieeexplore.ieee.org/document/9560896), [HAL](https://hal.archives-ouvertes.fr/hal-03175707), [Video](https://youtu.be/DCcfA2HB1GI)
+
 ```
-@inproceedings{brunel2021splatplanner,
+@inproceedings{BrunelICRA2021,
+>>>>>>> d263d9f259fea3caa85885b1ec93f75ce2572291
   title={SplatPlanner: Efficient Autonomous Exploration via Permutohedral Frontier Filtering},
   author={Brunel, Anthony and Bourki, Amine and Demonceaux, C{\'e}dric and Strauss, Olivier},
   booktitle={IEEE International Conference on Robotics and Automation (ICRA 2021)},
   year={2021}
 }
 ```
+Classic Frontier
 
+```
+@inproceedings{yamauchi1997frontier,
+  title={A frontier-based approach for autonomous exploration},
+  author={Yamauchi, Brian},
+  booktitle={Proceedings 1997 IEEE International Symposium on Computational Intelligence in Robotics and Automation CIRA'97.'Towards New Computational Principles for Robotics and Automation'},
+  pages={146--151},
+  year={1997},
+  organization={IEEE}
+}
+```
+Rapid Frontier
+
+```
+@inproceedings{cieslewski2017rapid,
+  title={Rapid exploration with multi-rotors: A frontier selection method for high speed flight},
+  author={Cieslewski, Titus and Kaufmann, Elia and Scaramuzza, Davide},
+  booktitle={2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={2135--2142},
+  year={2017},
+  organization={IEEE}
+}
+```
