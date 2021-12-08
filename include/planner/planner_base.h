@@ -14,7 +14,6 @@
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
-#include "include/poly_traj/optimalsmalltraj.h"
 
 #include "../include/trajectory/polytrajinterface.h"
 #include "constraint.h"

@@ -15,9 +15,8 @@
 
 #include "../utils/permutohedral.h"
 #include <Eigen/Dense>
-#include "../trajectory/kinodynamicastar.h"
 
-
+#include <unordered_map>
 
 class FrontierEvaluator
 {

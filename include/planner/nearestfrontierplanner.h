@@ -2,7 +2,6 @@
 #include "planner_base.h"
 
 #include "../../include/trajectory/velocitytrajinterface.h"
-#include "../../include/trajectory/dyntrajectory.h"
 #include "../map/frontierevaluator.h"
 
 #include "trajectory/trajectoryompl.h"
